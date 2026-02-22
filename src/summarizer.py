@@ -5,7 +5,7 @@ class ClusterSummarizer:
     def __init__(self):
         # Using a lightweight local summarizer
         try:
-            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", revision="a4f8f3e")
+            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", revision="a4f8f3e", framework="pt")
         except Exception as e:
             logging.warning(f"Summarizer failed to initialize (check if torch is installed): {e}")
             self.summarizer = None
@@ -13,6 +13,9 @@ class ClusterSummarizer:
     def summarize(self, cluster_texts):
         """Generate a label for the cluster using a local LLM."""
         if self.summarizer is None:
+            # Fallback: Use the first review as a representative label
+            if cluster_texts:
+                return f"Topic: {cluster_texts[0][:60]}..."
             return "Summary Unavailable"
             
         context = " ".join(cluster_texts[:5]) 
