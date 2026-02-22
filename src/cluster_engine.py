@@ -20,7 +20,7 @@ def discover_clusters(embeddings, algorithm='kmeans', num_clusters=5, min_cluste
         labels = model.fit_predict(embeddings)
         
     elif algorithm == 'hdbscan':
-        model = HDBSCAN(min_cluster_size=min_cluster_size)
+        model = HDBSCAN(min_cluster_size=min_cluster_size, copy=True)
         labels = model.fit_predict(embeddings)
         
     else:

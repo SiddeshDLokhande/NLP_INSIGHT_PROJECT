@@ -64,7 +64,7 @@ else:
                              hover_data=['document'], 
                              title=f"{algo_name} Clusters (PCA Projection)",
                              labels={'PC1': 'Theme Dimension 1', 'PC2': 'Theme Dimension 2'})
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
             
             # Summaries
             unique_labels = sorted(set(labels))
