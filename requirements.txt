@@ -1,0 +1,8 @@
+streamlit
+pandas
+datasets
+sentence-transformers
+chromadb
+scikit-learn
+transformers
+torch
